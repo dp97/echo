@@ -29,6 +29,42 @@ void	ft_flag(char *argv, int *flags)
 	}
 }
 
+char	ft_eflag(char c)
+{
+	if (c == 'a')
+		return ('\a');
+	else if (c == 'b')
+		return ('\b');
+	else if (c == 'f')
+		return ('\f');
+	else if (c == 'n')
+		return ('\n');
+	else if (c == 'r')
+		;
+	else if (c == 't')
+		;
+	else if (c == 'v')
+		;
+	else if (c == '\\')
+		;
+	else if (c == '\'')
+		;
+	else if (c == '\"')
+		;
+	else if (c == '\?')
+		;
+	/*
+	else if (c == '\c')
+		;
+	else if (c == '\e')
+		;
+	else if (c == '\NNN')
+		;
+	else if (c == '\xnnn')
+		;*/
+	return (c);
+}
+
 int	main(int argc, char *argv[])
 {
 	int	flags;
@@ -37,7 +73,11 @@ int	main(int argc, char *argv[])
 	while (*++argv && *argv[0] == '-')
 		ft_flag(*argv, &flags);
 	if (flags & 2)
-		write(1, "\t", 1);
+	{
+		char tab = ft_eflag(argv[0][0]);
+		write(1, &tab, 1);
+		(*argv)++;
+	}
 	while (*argv)
 	{
 		if (write(STDOUT_FILENO, *argv, strlen(*argv)) == -1)
